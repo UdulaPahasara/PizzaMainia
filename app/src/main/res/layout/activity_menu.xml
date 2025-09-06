@@ -46,6 +46,7 @@
             >
 
             <Button
+                android:id="@+id/allBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="All"
@@ -54,18 +55,21 @@
                 style="?android:attr/buttonBarButtonStyle"/>
 
             <Button
+                android:id="@+id/pizzaBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#e99934"
                 android:text="Pizza"/>
 
             <Button
+                android:id="@+id/drinksBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#e99934"
                 android:text="Drinks"/>
 
             <Button
+                android:id="@+id/sidesBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#e99934"

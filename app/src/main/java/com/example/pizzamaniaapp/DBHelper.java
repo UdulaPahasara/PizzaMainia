@@ -24,7 +24,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "name TEXT NOT NULL, " +
                 "description TEXT, " +
                 "price REAL NOT NULL, " +
-                "image_url TEXT)");
+                "image_url TEXT, " +
+                "category TEXT)");
 
         // Cart Table
         MyDB.execSQL("CREATE TABLE cart(" +
@@ -36,10 +37,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(item_id) REFERENCES menu(item_id))");
 
         //Insert Data
-        MyDB.execSQL("INSERT INTO menu (name, description, price, image_url) VALUES " +
-                "('Chicken Pizza', 'Spicy chicken with cheese', 1200, 'sample_pizza')," +
-                "('Veggie Delight', 'Fresh vegetables and cheese', 950, 'veggie_pizza')," +
-                "('Coca-Cola 1L', 'Chilled soft drink', 350, 'coke')");
+        MyDB.execSQL("INSERT INTO menu (name, description, price, image_url, category) VALUES " +
+                "('Chicken Pizza', 'Spicy chicken with cheese', 1200, 'sample_pizza', 'Pizza')," +
+                "('Veggie Delight', 'Fresh vegetables and cheese', 950, 'veggie_pizza', 'Pizza')," +
+                "('Coca-Cola 1L', 'Chilled soft drink', 350, 'coke', 'Drinks')");
 
     }
 
@@ -105,5 +106,16 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase MyDB = this.getReadableDatabase();
         Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[]{username, password});
         return cursor.getCount() > 0;
+    }
+
+    // Get menu items by category
+    public Cursor getMenuByCategory(String category) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        if (category.equals("All")) {
+            return db.rawQuery("SELECT * FROM menu", null);
+        } else {
+            return db.rawQuery("SELECT * FROM menu WHERE category = ?", new String[]{category});
+        }
     }
 }
