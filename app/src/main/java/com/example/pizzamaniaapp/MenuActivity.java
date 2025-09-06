@@ -49,6 +49,21 @@ public class MenuActivity extends AppCompatActivity {
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
+        // load all items at first
+        loadMenu("All");
+
+        //hook up category buttons
+        Button allBtn = findViewById(R.id.allBtn);
+        Button pizzaBtn = findViewById(R.id.pizzaBtn);
+        Button drinksBtn = findViewById(R.id.drinksBtn);
+        Button sidesBtn = findViewById(R.id.sidesBtn);
+
+        allBtn.setOnClickListener(v -> loadMenu("All"));
+        pizzaBtn.setOnClickListener(v -> loadMenu("Pizza"));
+        drinksBtn.setOnClickListener(v -> loadMenu("Drinks"));
+        sidesBtn.setOnClickListener(v -> loadMenu("Sides"));
+
+
         FloatingActionButton cartFab= findViewById(R.id.cartFab);
         cartFab.setOnClickListener(v->{
             Intent intent=new Intent(MenuActivity.this,CartActivity.class);
