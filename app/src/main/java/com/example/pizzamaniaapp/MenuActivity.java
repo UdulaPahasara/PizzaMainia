@@ -74,4 +74,31 @@ public class MenuActivity extends AppCompatActivity {
         }
         cursor.close();
     }
+
+    //Reusable method to load menu by category
+    private void loadMenu(String category) {
+        itemIds.clear();
+        foodNames.clear();
+        foodPrices.clear();
+        foodImages.clear();
+
+        Cursor cursor = dbHelper.getMenuByCategory(category);
+
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow("item_id"));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+            String price = cursor.getString(cursor.getColumnIndexOrThrow("price"));
+            String imageName = cursor.getString(cursor.getColumnIndexOrThrow("image_url"));
+
+            int resId = getResources().getIdentifier(imageName, "drawable", getPackageName());
+
+            itemIds.add(id);
+            foodNames.add(name);
+            foodPrices.add(price);
+            foodImages.add(resId);
+        }
+        cursor.close();
+
+        adapter.notifyDataSetChanged(); // refresh RecyclerView
+    }
 }
